@@ -32,7 +32,9 @@ mavenPublishing {
     coordinates("io.github.avasiaxx", "project-trellis", "1.0.0")
 
     publishToMavenCentral()
-    signAllPublications()
+    if (gradle.startParameter.taskNames.any { it.contains("MavenCentral", ignoreCase = true) }) {
+        signAllPublications()
+    }
 
     pom {
         name.set("ProjectTrellis")
