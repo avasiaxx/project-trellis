@@ -10,6 +10,10 @@ Never commit:
 - `TRELLO_TOKEN`
 - `TRELLO_BOARD_ID` when the board identity should remain private
 - Local `tokens.env`, `.env`, or `.env.local` files
+- Central Portal publishing credentials
+- GPG private keys or signing passwords
+
+Use environment variables or a local user-level Gradle properties file for publishing secrets. Do not store Maven Central credentials or signing keys in this repository.
 
 ## Reporting Security Issues
 

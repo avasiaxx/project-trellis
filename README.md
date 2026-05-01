@@ -5,28 +5,21 @@ A small Kotlin/JVM service for growing project plans into Trello board structure
 ## Project Shape
 
 - Library package: `io.avasia.projecttrellis`
-- Artifact: `io.avasia:project-trellis:1.0.0`
+- Maven Central artifact: `io.github.avasiaxx:project-trellis:1.0.0`
 - JVM toolchain: 17
 - External runtime dependencies: none
 
 ## Use As A Dependency
 
-Publish the library to your local Maven cache:
-
-```powershell
-gradle publishToMavenLocal
-```
-
-Then add it to another Kotlin/Gradle project:
+After the artifact is published to Maven Central, add it to another Kotlin/Gradle project:
 
 ```kotlin
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
-    implementation("io.avasia:project-trellis:1.0.0")
+    implementation("io.github.avasiaxx:project-trellis:1.0.0")
 }
 ```
 
@@ -39,8 +32,45 @@ includeBuild("../project-trellis")
 
 ```kotlin
 dependencies {
-    implementation("io.avasia:project-trellis")
+    implementation("io.github.avasiaxx:project-trellis")
 }
+```
+
+Or publish it to your local Maven cache:
+
+```powershell
+gradle publishToMavenLocal
+```
+
+## Publish To Maven Central
+
+ProjectTrellis uses the Central Portal publishing flow through the `com.vanniktech.maven.publish` Gradle plugin.
+
+Before publishing, create or verify a namespace in the Central Portal. For this repository, the intended Maven Central namespace is:
+
+```text
+io.github.avasiaxx
+```
+
+Set Central Portal user-token credentials and signing credentials outside the repository:
+
+```powershell
+$env:ORG_GRADLE_PROJECT_mavenCentralUsername="<central portal token username>"
+$env:ORG_GRADLE_PROJECT_mavenCentralPassword="<central portal token password>"
+$env:ORG_GRADLE_PROJECT_signingInMemoryKey="<ascii-armored private gpg key>"
+$env:ORG_GRADLE_PROJECT_signingInMemoryKeyPassword="<gpg key password>"
+```
+
+Upload for manual review/publish in Central Portal:
+
+```powershell
+gradle publishToMavenCentral
+```
+
+Upload and automatically release after validation:
+
+```powershell
+gradle publishAndReleaseToMavenCentral
 ```
 
 ## Basic Kotlin Usage
