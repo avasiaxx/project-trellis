@@ -23,6 +23,27 @@ dependencies {
 }
 ```
 
+For local development before Maven Central publication, first publish ProjectTrellis to your local Maven cache:
+
+```powershell
+.\gradlew.bat publishToMavenLocal
+```
+
+Then add `mavenLocal()` to the consuming project:
+
+```kotlin
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.github.avasiaxx:project-trellis:1.0.0")
+}
+```
+
+Do not consume ProjectTrellis by copying source files, creating temporary Java runner files, or referencing files under `C:\tmp`. The consuming project should resolve ProjectTrellis through Gradle dependency resolution.
+
 For local development, you can also include this project as a composite build:
 
 ```kotlin
@@ -34,12 +55,6 @@ includeBuild("../project-trellis")
 dependencies {
     implementation("io.github.avasiaxx:project-trellis")
 }
-```
-
-Or publish it to your local Maven cache:
-
-```powershell
-gradle publishToMavenLocal
 ```
 
 ## Publish To Maven Central
