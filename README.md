@@ -9,6 +9,10 @@ A small Kotlin/JVM service for growing project plans into Trello board structure
 - JVM toolchain: 17
 - External runtime dependencies: none
 
+## Agent Instructions
+
+Agents should read `docs/agent-memory-rules.md` before using ProjectTrellis in another project. That file defines the canonical dependency coordinates, files to inspect, credential rules, and prohibited temp-file workarounds.
+
 ## Use As A Dependency
 
 After the artifact is published to Maven Central, add it to another Kotlin/Gradle project:
