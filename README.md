@@ -115,9 +115,11 @@ Copy `.env.example` to `tokens.env`, fill in your Trello credentials, then run:
 gradle run --args="trello help"
 gradle run --args="trello boards"
 gradle run --args="trello lists"
+gradle run --args="trello cards"
 gradle run --args="trello create-list Backlog"
 gradle run --args="trello create-card <listId> ""Card title"" ""Card description"""
 gradle run --args="trello move-card <cardId> <listId>"
+gradle run --args="trello update-card <cardId> ""Card title"" ""Card description"""
 gradle run --args="trello comment <cardId> ""Comment text"""
 gradle run --args="trello bootstrap-board"
 ```
@@ -142,6 +144,7 @@ Keep `tokens.env` out of Git. This project ignores it by default.
 
 - `GET /1/members/me/boards`
 - `GET /1/boards/{boardId}/lists`
+- `GET /1/boards/{boardId}/cards`
 - `POST /1/lists`
 - `POST /1/labels`
 - `POST /1/cards`

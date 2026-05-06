@@ -15,9 +15,11 @@ class TrelloCli(env: DotEnv) {
         when (args.firstOrNull()) {
             "boards" -> println(client.getBoards())
             "lists" -> println(client.getBoardLists(args.getOrNull(1) ?: requireBoardId()))
+            "cards" -> println(client.getBoardCards(args.getOrNull(1) ?: requireBoardId()))
             "create-list" -> createList(args)
             "create-card" -> createCard(args)
             "move-card" -> moveCard(args)
+            "update-card" -> updateCard(args)
             "comment" -> addComment(args)
             "bootstrap-board" -> bootstrapBoard(args.getOrNull(1) ?: requireBoardId())
             null, "help", "--help", "-h" -> printHelp()
@@ -45,6 +47,13 @@ class TrelloCli(env: DotEnv) {
         val cardId = args.getOrNull(1) ?: error("Usage: trello move-card <cardId> <listId>")
         val listId = args.getOrNull(2) ?: error("Usage: trello move-card <cardId> <listId>")
         println(client.moveCard(cardId = cardId, listId = listId))
+    }
+
+    private fun updateCard(args: List<String>) {
+        val cardId = args.getOrNull(1) ?: error("Usage: trello update-card <cardId> <title> [description]")
+        val title = args.getOrNull(2) ?: error("Usage: trello update-card <cardId> <title> [description]")
+        val description = args.drop(3).joinToString(" ").takeIf { it.isNotBlank() }
+        println(client.updateCard(cardId = cardId, name = title, description = description))
     }
 
     private fun addComment(args: List<String>) {
@@ -122,9 +131,11 @@ class TrelloCli(env: DotEnv) {
             Trello commands:
               trello boards
               trello lists [boardId]
+              trello cards [boardId]
               trello create-list <name> [boardId]
               trello create-card <listId> <title> [description]
               trello move-card <cardId> <listId>
+              trello update-card <cardId> <title> [description]
               trello comment <cardId> <comment>
               trello bootstrap-board [boardId]
             """.trimIndent()

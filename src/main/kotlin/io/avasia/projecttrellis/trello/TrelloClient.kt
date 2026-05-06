@@ -28,6 +28,13 @@ class TrelloClient(
             query = mapOf("fields" to "name"),
         )
 
+    fun getBoardCards(boardId: String): String =
+        send(
+            method = "GET",
+            path = "/1/boards/$boardId/cards",
+            query = mapOf("fields" to "name,idList,closed,url"),
+        )
+
     fun createList(boardId: String, name: String): String =
         send(
             method = "POST",
@@ -74,6 +81,18 @@ class TrelloClient(
             method = "PUT",
             path = "/1/cards/$cardId",
             query = mapOf("idList" to listId),
+        )
+
+    fun updateCard(cardId: String, name: String, description: String?): String =
+        send(
+            method = "PUT",
+            path = "/1/cards/$cardId",
+            query = buildMap {
+                put("name", name)
+                if (description != null) {
+                    put("desc", description)
+                }
+            },
         )
 
     fun addComment(cardId: String, comment: String): String =

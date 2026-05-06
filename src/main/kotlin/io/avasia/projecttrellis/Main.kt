@@ -24,9 +24,11 @@ private fun printHelp() {
         Commands:
           trello boards
           trello lists [boardId]
+          trello cards [boardId]
           trello create-list <name> [boardId]
           trello create-card <listId> <title> [description]
           trello move-card <cardId> <listId>
+          trello update-card <cardId> <title> [description]
           trello comment <cardId> <comment>
           trello bootstrap-board [boardId]
 
