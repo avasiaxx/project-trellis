@@ -33,6 +33,11 @@ For local development before Maven Central publication, first publish ProjectTre
 .\gradlew.bat publishToMavenLocal
 ```
 
+Republish after local ProjectTrellis CLI or client changes before testing a
+consumer project such as Chronicle Atlas. On a laptop or other secondary
+machine, Maven local and Gradle caches are machine-specific, so a commit being
+present in Git does not mean the consumer can resolve the updated artifact.
+
 Then add `mavenLocal()` to the consuming project:
 
 ```kotlin
